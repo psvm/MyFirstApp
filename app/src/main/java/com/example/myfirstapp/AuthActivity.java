@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +22,10 @@ public class AuthActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             if (isEmailValid()&& isPasswordValid()){
-                //переход в приложение
+                Intent startProfileIntent = new Intent(AuthActivity.this, ProfileActivity.class);
+                startProfileIntent.putExtra(ProfileActivity.USER_KEY,
+                        new User(mLogin.getText().toString(), mPassword.getText().toString()));
+                startActivity(startProfileIntent);
             }
             else {
                 showMessage(R.string.login_input_error);
